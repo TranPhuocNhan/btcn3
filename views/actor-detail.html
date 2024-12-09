@@ -4,11 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Actor Details</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <style>
-    .movie-image {
+    .actor-image {
       width: 100%;
       height: auto;
     }
@@ -39,7 +39,7 @@
   <div class="container w-1200">
     <div class="row rounded-2 m-1 border border-secondary-subtle">
       <div class="col-2 align-self-center">21120515</div>
-      <h1 class="col-8 text-center">Movies information</h1>
+      <h1 class="col-8 text-center">Actor Information</h1>
       <div class="col me-2">
         <div class="form-check form-switch float-end mt-3">
           <input class="form-check-input" type="checkbox" role="switch" id="mode" />
@@ -57,75 +57,31 @@
       </div>
     </div>
 
-    <nav class="navbar navbar-expand-lg m-1 mt-2 rounded-2 border border-secondary-subtle">
-      <div class="container-fluid">
-        <a href="/">
-          <svg class="link text-dark fs-4" xmlns="http://www.w3.org/2000/svg" height="1em" fill="currentColor"
-            viewBox="0 0 576 512">
-            <path
-              d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z" />
-          </svg>
-        </a>
-
-        <a href="/movie/fav-movie" class="link text-decoration-none text-dark">21515</a>
-
-        <form action="/search/actor" role="search" class="search-form d-flex">
-          <input type="search" class="form-control me-2" name="q" placeholder="Search actors" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-
-        <form role="search" class="search-form d-flex" action="/search">
-          <input type="search" class="form-control me-2" name="q" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </nav>
-
     <div class="row">
       <div class="col-md-4">
-        <img src="21515{movie.image}" alt="Movie Poster" class="movie-image zoom">
+        <img src="21515{actor.image}" alt="Actor Image" class="actor-image zoom">
       </div>
 
       <div class="col-md-8">
-        <h1 class="text-center">21515{movie.fulltitle}</h1>
-        <p class="lead text-center text-muted">Release Year: 21515{movie.year}</p>
-
-        <p class="lead text-center text-muted">Genre: </p>
-        <p class="lead text-center text-muted">Rate: 21515{movie.ratings} </p>
-
-        <div class="mt-4">
-          <h4>Cast:</h4>
-          <div>
-            21515{for ats in actors}
-            <a href="/actor/21515{ats.id}">
-              <li>21515{ats.name}</li>
-            </a>
-            {/for}
-          </div>
-
-        </div>
+        <h1 class="text-center">21515{actor.name}</h1>
+        <p class="lead text-center text-muted">Role: 21515{actor.role}</p>
 
         <div class="mt-4">
           <h4>Summary:</h4>
-          <p>21515{movie.plot}</p>
+          <p>21515{actor.summary}</p>
         </div>
 
-
-      </div>
-      <div class="mt-4">
-        <h4>Reviews:</h4>
-        21515{for review in reviews}
-        <div class="card mb-3 ms-2 me-2">
-          <div class="card-body">
-            <h5 class="card-title">21515{review.username}</h5>
-            <p class="card-text">21515{review.content}</p>
+        <div class="mt-4">
+          <h4>Cast Movies:</h4>
+          <div>
+            21515{for film in movies}
+            <a href="/movie/21515{film.id}" class="link text-decoration-none">
+              <li>21515{film.title}</li>
+            </a>
+            {/for}
           </div>
         </div>
-      </div>
-      {/for}
 
-      <div class="mt-4 text-center">
-        <button class="btn btn-primary">Add Review</button>
       </div>
     </div>
 
@@ -174,16 +130,6 @@
           lightMode.classList.remove('d-none');
         }
       })
-
-      if (document.querySelector('.pagination')) {
-        const page = document.querySelector('.pagination').getAttribute('page');
-        const pageItems = document.querySelectorAll('.page-link');
-        pageItems.forEach((pageItem) => {
-          if (pageItem.textContent === page) {
-            pageItem.classList.add('active');
-          }
-        })
-      }
     </script>
 </body>
 

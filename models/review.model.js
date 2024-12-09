@@ -11,6 +11,6 @@ module.exports = class Review {
       movieId
     );
 
-    return data;
+    return data.items;
   }
 };

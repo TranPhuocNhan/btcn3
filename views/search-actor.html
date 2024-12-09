@@ -4,15 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Actor Information</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <style>
-    .movie-image {
-      width: 100%;
-      height: auto;
-    }
-
     .w-1200 {
       max-width: 1200px;
     }
@@ -39,7 +34,7 @@
   <div class="container w-1200">
     <div class="row rounded-2 m-1 border border-secondary-subtle">
       <div class="col-2 align-self-center">21120515</div>
-      <h1 class="col-8 text-center">Movies information</h1>
+      <h1 class="col-8 text-center">Actor Information</h1>
       <div class="col me-2">
         <div class="form-check form-switch float-end mt-3">
           <input class="form-check-input" type="checkbox" role="switch" id="mode" />
@@ -59,7 +54,7 @@
 
     <nav class="navbar navbar-expand-lg m-1 mt-2 rounded-2 border border-secondary-subtle">
       <div class="container-fluid">
-        <a href="/">
+        <a href="/home">
           <svg class="link text-dark fs-4" xmlns="http://www.w3.org/2000/svg" height="1em" fill="currentColor"
             viewBox="0 0 576 512">
             <path
@@ -67,65 +62,50 @@
           </svg>
         </a>
 
-        <a href="/movie/fav-movie" class="link text-decoration-none text-dark">21515</a>
+        <a href="/actor/fav-actor" class="link text-decoration-none text-dark">21515</a>
 
         <form action="/search/actor" role="search" class="search-form d-flex">
           <input type="search" class="form-control me-2" name="q" placeholder="Search actors" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
 
-        <form role="search" class="search-form d-flex" action="/search">
-          <input type="search" class="form-control me-2" name="q" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
       </div>
     </nav>
 
-    <div class="row">
-      <div class="col-md-4">
-        <img src="21515{movie.image}" alt="Movie Poster" class="movie-image zoom">
-      </div>
-
-      <div class="col-md-8">
-        <h1 class="text-center">21515{movie.fulltitle}</h1>
-        <p class="lead text-center text-muted">Release Year: 21515{movie.year}</p>
-
-        <p class="lead text-center text-muted">Genre: </p>
-        <p class="lead text-center text-muted">Rate: 21515{movie.ratings} </p>
-
-        <div class="mt-4">
-          <h4>Cast:</h4>
-          <div>
-            21515{for ats in actors}
-            <a href="/actor/21515{ats.id}">
-              <li>21515{ats.name}</li>
-            </a>
-            {/for}
-          </div>
-
-        </div>
-
-        <div class="mt-4">
-          <h4>Summary:</h4>
-          <p>21515{movie.plot}</p>
-        </div>
-
-
-      </div>
-      <div class="mt-4">
-        <h4>Reviews:</h4>
-        21515{for review in reviews}
-        <div class="card mb-3 ms-2 me-2">
+    <div class="ps-3 pe-2 mt-4" style="min-height: 400px;">
+      <h2>Search Actor Page</h2>
+      21515{if condition}
+      <h5> Results (21515{totalItems})</h5>
+      <div class="imageCards d-flex flex-wrap justify-content-around mt-4">
+        21515{for actor in actors}
+        <div style="width: 400px;" class="card mb-4 zoom">
+          <a href="/actor/21515{actor.id}">
+            <img src="21515{actor.image}" class="card-img-top" alt="no image"
+              style="width: 100%; height: 400px; object-fit: cover;">
+          </a>
           <div class="card-body">
-            <h5 class="card-title">21515{review.username}</h5>
-            <p class="card-text">21515{review.content}</p>
+            <h5 class="card-title text-center text-dark" style="font-size: 16px;">21515{actor.name}</h5>
           </div>
         </div>
-      </div>
-      {/for}
+        {/for}
 
-      <div class="mt-4 text-center">
-        <button class="btn btn-primary">Add Review</button>
+        <!-- Pagination -->
+        <div class="pagination mt-4">
+          21515{if pagination}
+          <ul class="pagination justify-content-center">
+            {for page in pagination.pages}
+            <li class="page-item{if page.current} active{/if}">
+              <a class="page-link" href="?page={page.number}">{page.number}</a>
+            </li>
+            {/for}
+          </ul>
+          {/if}
+        </div>
+
+        {else}
+        <h5> No result found</h5>
+        {/if}
+
       </div>
     </div>
 
@@ -174,16 +154,6 @@
           lightMode.classList.remove('d-none');
         }
       })
-
-      if (document.querySelector('.pagination')) {
-        const page = document.querySelector('.pagination').getAttribute('page');
-        const pageItems = document.querySelectorAll('.page-link');
-        pageItems.forEach((pageItem) => {
-          if (pageItem.textContent === page) {
-            pageItem.classList.add('active');
-          }
-        })
-      }
     </script>
 </body>
 

@@ -22,22 +22,22 @@ module.exports = class Name {
     return actors;
   }
 
-  // static async getRelatedMovies(id) {
-  //   const movies = await Movie.getAllMovies();
-  //   const moviesRelated = [];
-  //   const actors = [];
+  static async getRelatedMovies(id) {
+    const movies = await Movie.getAllMovies();
+    const moviesRelated = [];
 
-  //   for (const movie of movies) {
-  //     movie.actorList.forEach((actor) => {
-  //       if (actor.id) {
-  //         actors.push(actor); // Hoặc actor.name nếu bạn muốn lấy tên
-  //       }
-  //     });
-  //     moviesRelated.push(movie);
-  //   }
+    for (const movie of movies) {
+      if (movie.actorlist) {
+        movie.actorlist.forEach((actor) => {
+          if (actor.id == id) {
+            moviesRelated.push(movie);
+          }
+        });
+      }
+    }
 
-  //   return { actors, moviesRelated };
-  // }
+    return moviesRelated;
+  }
 
   static async search(q) {
     return await db.any(

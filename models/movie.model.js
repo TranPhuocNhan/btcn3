@@ -1,3 +1,4 @@
+const { Network } = require("inspector/promises");
 const db = require("../utils/db");
 const schema = "s21515";
 const tableMovieName = "movies";
@@ -46,5 +47,27 @@ module.exports = class Movie {
     return await db.any(
       `SELECT * FROM ${schema}.${tableFavMovieName} ORDER BY rank DESC`
     );
+  }
+
+  static async search(q) {
+    const searchByTitle = await db.any(
+      `SELECT * FROM ${schema}.${tableMovieName} WHERE title ILIKE $1`,
+      [`%${q}%`]
+    );
+
+    const searchByGenre = await db.any(
+      `
+    SELECT *
+    FROM ${schema}.${tableMovieName}
+    WHERE EXISTS (
+        SELECT 1
+        FROM jsonb_array_elements(genrelist) AS genre
+        WHERE LOWER(genre->>'key') = LOWER($1)
+    );
+    `,
+      [q] // Thay q bằng giá trị bạn muốn tìm kiếm
+    );
+
+    return [...searchByTitle, ...searchByGenre];
   }
 };
