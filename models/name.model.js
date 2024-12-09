@@ -41,8 +41,8 @@ module.exports = class Name {
 
   static async search(q) {
     return await db.any(
-      `SELECT * FROM ${schema}.${tableName} WHERE name ILIKE '%$1#%'`,
-      q
+      `SELECT * FROM ${schema}.${tableName} WHERE name ILIKE $1`,
+      [`%${q}%`]
     );
   }
 };

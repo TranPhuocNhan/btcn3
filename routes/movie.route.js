@@ -6,3 +6,4 @@ router.get("/movie/:id", movieController.detailPage);
 router.get("/actor/:id", movieController.actorPage);
 module.exports = router;
 router.get("/search", movieController.searchPage);
+router.get("/search/actor", movieController.searchActorPage);
