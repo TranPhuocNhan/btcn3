@@ -12,9 +12,14 @@ module.exports = class Movie {
     );
   }
   static async getTopBoxOfficeMovies() {
-    return await db.any(
+    const topBoxOfficeMovies = [];
+    const tmp = await db.any(
       `SELECT * FROM ${schema}.${tableMovieName} WHERE boxOffice IS NOT NULL ORDER BY boxOffice DESC LIMIT 15`
     );
+    for (let i = 0; i < 5; i++) {
+      topBoxOfficeMovies.push(tmp.slice(3 * i, 3 * i + 3));
+    }
+    return topBoxOfficeMovies;
   }
   static async getAllMovies() {
     return await db.any(`SELECT * FROM ${schema}.${tableMovieName}`);
@@ -32,7 +37,7 @@ module.exports = class Movie {
     );
     const topFavMovies = [];
     for (let i = 0; i < 5; i++) {
-      topFavMovies.push(temp.slice(i + 3, 3 * i + 3));
+      topFavMovies.push(temp.slice(i * 3, 3 * i + 3));
     }
     return topFavMovies;
   }

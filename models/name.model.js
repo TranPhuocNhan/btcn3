@@ -7,7 +7,7 @@ module.exports = class Name {
   constructor() {}
 
   static async getDetailActor(id) {
-    return await db.one(
+    return await db.oneOrNone(
       `SELECT * FROM ${schema}.${tableName} WHERE id = $1`,
       id
     );
@@ -22,19 +22,23 @@ module.exports = class Name {
     return actors;
   }
 
-  static async getRelatedMovies(id) {
-    const movies = await Movie.getAllMovies();
-    const moviesRelated = [];
+  // static async getRelatedMovies(id) {
+  //   const movies = await Movie.getAllMovies();
+  //   const moviesRelated = [];
+  //   const actors = [];
 
-    for (const movie of movies) {
-      for (const actor of movie.actorList) {
-        if (actor === id) {
-          moviesRelated.push(movie);
-        }
-      }
-    }
-    return moviesRelated;
-  }
+  //   for (const movie of movies) {
+  //     movie.actorList.forEach((actor) => {
+  //       if (actor.id) {
+  //         actors.push(actor); // Hoặc actor.name nếu bạn muốn lấy tên
+  //       }
+  //     });
+  //     moviesRelated.push(movie);
+  //   }
+
+  //   return { actors, moviesRelated };
+  // }
+
   static async search(q) {
     return await db.any(
       `SELECT * FROM ${schema}.${tableName} WHERE name ILIKE '%$1#%'`,

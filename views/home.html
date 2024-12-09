@@ -9,69 +9,288 @@
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <style>
     .w-1200 {
-      width: 1200px;
+      max-width: 1200px;
+    }
+
+    .zoom {
+      overflow: visible;
+      transition: transform .2s;
+    }
+
+    .zoom:hover {
+      transform: scale(1.2);
+      position: relative;
+      z-index: 100;
+      cursor: pointer;
+    }
+
+    .mr-p {
+      margin-right: -4rem;
+    }
+
+    .ml-p {
+      margin-left: -4rem;
+    }
+
+    body {
+      overflow-x: hidden;
     }
   </style>
 </head>
-<div class="container w-1200">
-  <div class="row rounded-2 m-1 border border-secondary-subtle">
-    <div class="col-2 align-self-center">21120515</div>
-    <h1 class="col-8 text-center">Movies information</h1>
-    <div class="col me-2">
-      <div class="form-check form-switch float-end mt-3">
-        <input class="form-check-input" type="checkbox" role="switch" id="mode" />
-        <svg xmlns="http://www.w3.org/2000/svg" height="1em" class="lightMode text-warning" fill="currentColor"
-          viewBox="0 0 512 512">
-          <path
-            d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z" />
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" height="1em" class="darkMode d-none text-warning" fill="currentColor"
-          viewBox="0 0 384 512">
-          <path
-            d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z" />
-        </svg>
-      </div>
-    </div>
-  </div>
-
-  <nav class="navbar navbar-expand-lg m-1 mt-2 rounded-2 border border-secondary-subtle">
-    <div class="container-fluid">
-      <a href="/">
-        <svg class="link text-dark fs-4" xmlns="http://www.w3.org/2000/svg" height="1em" fill="currentColor"
-          viewBox="0 0 576 512">
-          <path
-            d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z" />
-        </svg>
-      </a>
-
-      <a href="/movie/fav-movie" class="link text-decoration-none text-dark">21515</a>
-
-      <!-- <form action="/search/actor" role="search" class="search-form d-flex">
-        <input type="search" class="form-control me-2" name="q" placeholder="Search actors" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form> -->
-
-      <form role="search" class="search-form d-flex" action="/search">
-        <input type="search" class="form-control me-2" name="q" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-
-    </div>
-
-  </nav>
-
-  <footer class="rounded-2 m-1 mt-1 border border-secondary-subtle">
-    <div class="text-center"> Nhan © Copyright</div>
-  </footer>
-</div>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script></script>
 
 <body>
+  <div class="container w-1200">
+    <div class="row rounded-2 m-1 border border-secondary-subtle">
+      <div class="col-2 align-self-center">21120515</div>
+      <h1 class="col-8 text-center">Movies information</h1>
+      <div class="col me-2">
+        <div class="form-check form-switch float-end mt-3">
+          <input class="form-check-input" type="checkbox" role="switch" id="mode" />
+          <svg xmlns="http://www.w3.org/2000/svg" height="1em" class="lightMode text-warning" fill="currentColor"
+            viewBox="0 0 512 512">
+            <path
+              d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" height="1em" class="darkMode d-none text-warning" fill="currentColor"
+            viewBox="0 0 384 512">
+            <path
+              d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z" />
+          </svg>
+        </div>
+      </div>
+    </div>
 
+    <nav class="navbar navbar-expand-lg m-1 mt-2 rounded-2 border border-secondary-subtle">
+      <div class="container-fluid">
+        <a href="/">
+          <svg class="link text-dark fs-4" xmlns="http://www.w3.org/2000/svg" height="1em" fill="currentColor"
+            viewBox="0 0 576 512">
+            <path
+              d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z" />
+          </svg>
+        </a>
+
+        <a href="/movie/fav-movie" class="link text-decoration-none text-dark">21515</a>
+
+        <form action="/search/actor" role="search" class="search-form d-flex">
+          <input type="search" class="form-control me-2" name="q" placeholder="Search actors" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+
+        <form role="search" class="search-form d-flex" action="/search">
+          <input type="search" class="form-control me-2" name="q" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+    <div id="highestFilm" class="carousel slide carousel-dark">
+      <div class="carousel-inner mt-2" style="overflow-x: hidden;">
+        21515{for film in moviesRating}
+        <div class="carousel-item" item-id="21515{index}">
+          <a href="/movie/21515{film.id}" class="d-block mx-auto" style="width: 350px;">
+            <img src="21515{film.image}" alt="no imge" width="350" height="450" class="d-block mx-auto zoom">
+          </a>
+          <div class="carousel-caption text-white" style="bottom: -0.75rem; z-index: 99;">
+            <p>21515{film.fulltitle}</p>
+            <!-- console.log(options.moviesRating[1].genrelist[0].key); -->
+          </div>
+        </div>
+        {/for}
+      </div>
+
+      <button class="carousel-control-prev ml-p" type="button" data-bs-target="#highestFilm" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+
+      <button class="carousel-control-next mr-p" type="button" data-bs-target="#highestFilm" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    <div id="mostPopular" class="carousel slide mt-4 carousel-dark">
+      <p class="fw-bold ps-2 mb-2">Top Box Office</p>
+
+      <div class="carousel-inner" item-id="21515{index}" style="overflow-x:none; overflow: visible">
+        21515{for film in topBoxOfficeMovies}
+        <div class="carousel-item" item-id="21515{index}">
+          <div class="mx-auto d-flex justify-content-center">
+            <div class="card mb-3 zoom mx-1 card-zoom" style="width: 30%; height: 300px; overflow: visible;">
+              <a href="/movie/21515{film[0].id}">
+                <img src="21515{film[0].image}" alt="no imge" style="width: 100%; height: 300px;" class="card-img-top">
+              </a>
+              <div class="card-body bg-black text-secondary py-2 rounded-2 d-none">
+                <p class="card-text text-yellow" style="font-size: 16px;">
+                  21515{film[0].title} (21515{film[0].year})
+                </p>
+              </div>
+            </div>
+
+            <div class="card mb-3 zoom mx-1 card-zoom" style="width: 30%; height: 300px; overflow: visible;">
+              <a href="/movie/21515{film[1].id}">
+                <img src="21515{film[1].image}" alt="no imge" style="width: 100%; height: 300px;" class="card-img-top">
+              </a>
+              <div class="card-body bg-black text-secondary py-2 rounded-2 d-none">
+                <p class="card-text text-yellow" style="font-size: 16px;">
+                  21515{film[1].title} (21515{film[1].year})
+                </p>
+              </div>
+            </div>
+
+            <div class="card mb-3 zoom mx-1 card-zoom" style="width: 30%; height: 300px; overflow: visible;">
+              <a href="/movie/21515{film[2].id}">
+                <img src="21515{film[2].image}" alt="no imge" style="width: 100%; height: 300px;" class="card-img-top">
+              </a>
+              <div class="card-body bg-black text-secondary py-2 rounded-2 d-none">
+                <p class="card-text text-yellow" style="font-size: 16px;">
+                  21515{film[2].title} (21515{film[2].year})
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/for}
+      </div>
+      <button class="carousel-control-prev w-5 ml-p" type="button" data-bs-target="#mostPopular" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next w-5 mr-p" type="button" data-bs-target="#mostPopular" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    <div id="topRating" class="carousel slide my-4 carousel-dark" data-bs-ride="true">
+      <span class="fw-bold ps-2 mb-1"> Top Rating</span>
+
+      <div class="carousel-inner " style="overflow-x:none; overflow: visible;">
+        21515{for film in topFavMovies}
+        <div class="carousel-item" item-id="21515{index}">
+          <div class="mx-auto d-flex justify-content-center">
+            <div class="card mb-3 zoom mx-1 card-zoom" style="width: 30%; height: 300px; overflow: visible">
+              <a href="/movie/21515{film[0].id}">
+                <img src="21515{film[0].image}" class="card-img-top" alt="..." style="width: 100%; height: 300px">
+              </a>
+              <div class="card-body bg-black text-secondary py-2 rounded-2 d-none">
+                <p class="card-text text-white" style="font-size: 16px;">
+                  21515{film[0].title} (21515{film[0].year})
+                </p>
+              </div>
+            </div>
+
+            <div class="card mb-3 zoom mx-1 card-zoom" style="width: 30%; height: 300px; overflow: visible">
+              <a href="/movie/21515{film[1].id}">
+                <img src="21515{film[1].image}" class="card-img-top" alt="..." style="width: 100%; height: 300px">
+              </a>
+              <div class="card-body bg-black text-secondary py-2 rounded-2 d-none">
+                <p class="card-text text-white" style="font-size: 16px;">
+                  21515{film[1].title} (21515{film[1].year})
+                </p>
+              </div>
+            </div>
+
+            <div class="card mb-3 zoom mx-1 card-zoom" style="width: 30%; height: 300px; overflow: visible">
+              <a href="/movie/21515{film[2].id}">
+                <img src="21515{film[2].image}" class="card-img-top" alt="..." style="width: 100%; height: 300px">
+              </a>
+              <div class="card-body bg-black text-secondary py-2 rounded-2 d-none">
+                <p class="card-text text-white" style="font-size: 16px;">
+                  21515{film[2].title} (21515{film[2].year})
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/for}
+      </div>
+
+      <button class="carousel-control-prev w-5 ml-p" type="button" data-bs-target="#topRating" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next w-5 mr-p" type="button" data-bs-target="#topRating" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    <footer class="rounded-2 m-1 mt-1 border border-secondary-subtle">
+      <div class="text-center"> Nhan © Copyright</div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"></script>
+    <script>
+      const slides = document.querySelectorAll('.carousel-item');
+      slides.forEach((slide) => {
+        if (slide.getAttribute('item-id') == 0) {
+          slide.classList.add('active');
+        }
+      })
+
+      const cardZooms = document.querySelectorAll('.card-zoom');
+      cardZooms.forEach((cardZoom) => {
+        cardZoom.addEventListener('mouseover', () => {
+          cardZoom.children[1].classList.remove('d-none');
+        })
+        cardZoom.addEventListener('mouseout', () => {
+          cardZoom.children[1].classList.add('d-none');
+        })
+      })
+
+      const mode = document.getElementById('mode');
+      const body = document.querySelector('body');
+      const nav = document.querySelector('nav');
+      const footer = document.querySelector('footer');
+
+      const carousel = document.querySelectorAll('.carousel');
+      const links = document.querySelectorAll('.link');
+      const darkMode = document.querySelector('.darkMode');
+      const lightMode = document.querySelector('.lightMode');
+
+      mode.addEventListener('click', () => {
+        if (mode.checked) {
+          body.classList.add('bg-dark', 'text-white');
+          nav.classList.remove('navbar-light');
+          nav.classList.add('navbar-dark');
+          footer.classList.add('bg-dark', 'text-white');
+
+          carousel.forEach((caro) => {
+            caro.classList.remove('carousel-dark');
+            caro.classList.add('carousel-light');
+          })
+
+          links.forEach((link) => {
+            link.classList.remove('text-dark');
+            link.classList.add('text-white');
+          })
+
+          darkMode.classList.remove('d-none');
+          lightMode.classList.add('d-none');
+        } else {
+          body.classList.remove('bg-dark', 'text-white');
+          nav.classList.remove('navbar-dark');
+          nav.classList.add('navbar-light');
+          footer.classList.remove('bg-dark', 'text-white');
+
+          carousel.forEach((caro) => {
+            caro.classList.remove('carousel-light');
+            caro.classList.add('carousel-dark');
+          })
+
+          links.forEach((link) => {
+            link.classList.remove('text-white');
+            link.classList.add('text-dark');
+          })
+
+          darkMode.classList.add('d-none');
+          lightMode.classList.remove('d-none');
+        }
+      })
+    </script>
 </body>
 
 </html>
