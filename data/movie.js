@@ -19,13 +19,25 @@ function autoStringify(movieData) {
   if (!movieData["releaseDate"]) {
     movieData["releaseDate"] = null;
   }
+
   if (!movieData["runtimeStr"]) {
     movieData["runtimeStr"] = null;
   }
+
+  if (!movieData["ratings"]) {
+    movieData["ratings"] = { imDb: null };
+  } else if (!movieData["ratings"].imDb) {
+    movieData["ratings"].imDb = null;
+  }
+
   if (!movieData["boxOffice"]) {
-    movieData["boxOffice"] = { cumulativeWorldwideGross: "0" };
+    movieData["boxOffice"] = { cumulativeWorldwideGross: null };
   } else if (!movieData["boxOffice"].cumulativeWorldwideGross) {
-    movieData["boxOffice"].cumulativeWorldwideGross = "0";
+    movieData["boxOffice"].cumulativeWorldwideGross = null;
+  } else if (movieData["boxOffice"].cumulativeWorldwideGross) {
+    movieData["boxOffice"].cumulativeWorldwideGross = parseFloat(
+      movieData["boxOffice"].cumulativeWorldwideGross.replace(/[$,]/g, "")
+    );
   }
 
   if (!movieData["plotFull"]) {
